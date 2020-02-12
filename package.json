@@ -1,10 +1,10 @@
 {
   "name": "api-routes",
   "version": "1.0.0",
-  "description": "",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
   },
   "author": "ZemaToxic",
   "license": "MIT",
@@ -15,5 +15,10 @@
     "helmet": "^3.21.2",
     "knex": "^0.20.9",
     "morgan": "^1.9.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZemaToxic/API-Routes/tree/master"
+  },
+  "description": "API Routes for ZemaToxic bots"
 }
