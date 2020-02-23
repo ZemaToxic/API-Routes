@@ -5,7 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 
-const database = require('./routes/database');
+const bans = require('./routes/bans');
 const databaseMiddle = require('./middleware/database');
 
 if (process.env.NODE_ENV !== 'production') {
@@ -45,8 +45,8 @@ app.get('/', (req, res) => {
   res.send('Landing page ~~');
 });
 
-app.get('/database', database.get);
-app.post('/database', database.post);
+app.get('/bans', bans.get);
+app.post('/bans', bans.post);
 
 // starting the server
 app.listen(3002, () => { console.log('listening on port 3002'); });
