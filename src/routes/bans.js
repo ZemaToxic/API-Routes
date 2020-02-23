@@ -12,13 +12,13 @@ module.exports = {
         }
     },
     
-    // get: async function (req, res) {
-        // try {
-        //     const data = await fetch.fetch(req, 'bot_bans');
-        //     res.send(data)
-        // }
-        // catch (err) {
-        //     res.send(err)
-        // }
-    // }
+    get: async function (req, res) {
+        try {
+            const data = await fetch.fetch(req, 'bot_bans');
+            res.send(data)
+        }
+        catch (err) {
+            res.send(err)
+        }
+    }
 }
