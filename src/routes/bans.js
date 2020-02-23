@@ -12,7 +12,7 @@ module.exports = {
         }
     },
     
-    get: async function (req, res) {
+    // get: async function (req, res) {
         // try {
         //     const data = await fetch.fetch(req, 'bot_bans');
         //     res.send(data)
@@ -20,5 +20,5 @@ module.exports = {
         // catch (err) {
         //     res.send(err)
         // }
-    }
+    // }
 }

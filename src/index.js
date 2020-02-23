@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
   res.send('Landing page ~~');
 });
 
-app.get('/bans', bans.get);
+// app.get('/bans', bans.get);
 app.post('/bans', bans.post);
 
 // starting the server
