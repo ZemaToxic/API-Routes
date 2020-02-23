@@ -15,12 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
 // defining the Express app
 const app = express();
 
-const {
-  DB_HOST,
-  DB_NAME,
-  DB_USER,
-  DB_CLIENT,
-} = process.env
+const { DB_HOST, DB_NAME, DB_USER, DB_CLIENT } = process.env
 
 // MIDDLEWARES
 app
@@ -33,11 +28,11 @@ app
     }
   }))
 
-// // adding Helmet to enhance your API's security
-// app.use(helmet());
+// adding Helmet to enhance your API's security
+app.use(helmet());
 
-// // using bodyParser to parse JSON bodies into JS objects
-// app.use(bodyParser.json());
+// using bodyParser to parse JSON bodies into JS objects
+app.use(bodyParser.json());
 
 // enabling CORS for all requests
 app.use(cors());
@@ -54,6 +49,4 @@ app.get('/database', database.get);
 app.post('/database', database.post);
 
 // starting the server
-app.listen(3002, () => {
-  console.log('listening on port 3002');
-});
+app.listen(3002, () => { console.log('listening on port 3002'); });
