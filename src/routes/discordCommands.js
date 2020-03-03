@@ -4,7 +4,7 @@ const save = require('../utils/save')
 module.exports = {
     post: async function (req, res) {
         try {
-            const data = await save.save(req, 'bot_bans');
+            const data = await save.save(req, 'DiscordCommands');
             res.send("Data Added")
         }
         catch (err) {
@@ -14,7 +14,7 @@ module.exports = {
     
     get: async function (req, res) {
         try {
-            const data = await fetch.fetch(req, 'bot_bans', 'ID');
+            const data = await fetch.fetch(req, 'DiscordCommands', 'CommandName');
             res.send(data)
         }
         catch (err) {

@@ -6,11 +6,17 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 
 const bans = require('./routes/bans');
+const discord = require('./routes/discordCommands')
 const databaseMiddle = require('./middleware/database');
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
+
+const path = require('path');
+// Change the Directory incase of spawned as child
+process.chdir(__dirname);
+process.title = `API/database/${path.basename(__dirname)}`;
 
 // defining the Express app
 const app = express();
@@ -47,6 +53,9 @@ app.get('/', (req, res) => {
 
 app.get('/bans', bans.get);
 app.post('/bans', bans.post);
+
+app.get('/commands', discord.get);
+app.post('/commands', discord.post);
 
 // starting the server
 app.listen(3002, () => { console.log('listening on port 3002'); });
