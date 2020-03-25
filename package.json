@@ -17,7 +17,8 @@
     "knex": "^0.20.9",
     "morgan": "^1.9.1",
     "mysql": "^2.18.1",
-    "simple-knex": "^1.0.0-beta.5"
+    "simple-knex": "^1.0.0-beta.5",
+    "ws": "^7.2.3"
   },
   "repository": {
     "type": "git",

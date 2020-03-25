@@ -1,10 +1,10 @@
-const fetch = require('../utils/fetch')
-const save = require('../utils/save')
+const fetch = require('../utils/fetchBans')
+const save = require('../utils/saveBans')
 
 module.exports = {
     post: async function (req, res) {
         try {
-            const data = await save.save(req, 'bot_bans');
+            await save.save(req, 'bot_bans');
             res.send("Data Added")
         }
         catch (err) {

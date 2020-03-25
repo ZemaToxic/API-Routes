@@ -6,7 +6,8 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 
 const bans = require('./routes/bans');
-const discord = require('./routes/discordCommands')
+const timeouts = require('./routes/timeouts');
+const commands = require('./routes/commands');
 const databaseMiddle = require('./middleware/database');
 
 if (process.env.NODE_ENV !== 'production') {
@@ -46,7 +47,7 @@ app.use(cors());
 // adding morgan to log HTTP requests
 app.use(morgan('combined'));
 
-// defining an endpoint to return all responseArray 
+// Default Endpoint, i.e no route specified 
 app.get('/', (req, res) => {
   res.send('Landing page ~~');
 });
@@ -54,8 +55,13 @@ app.get('/', (req, res) => {
 app.get('/bans', bans.get);
 app.post('/bans', bans.post);
 
-app.get('/commands', discord.get);
-app.post('/commands', discord.post);
+app.get('/timeouts', timeouts.get);
+app.post('/timeouts', timeouts.post);
+
+app.get('/commands', commands.get);
+app.post('/commands', commands.post);
+app.delete('/commands', commands.del);
+app.patch('/commands', commands.patch);
 
 // starting the server
 app.listen(3002, () => { console.log('listening on port 3002'); });

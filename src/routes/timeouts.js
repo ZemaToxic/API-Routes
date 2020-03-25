@@ -1,10 +1,10 @@
-const fetch = require('../utils/fetch')
-const save = require('../utils/save')
+const fetch = require('../utils/fetchTimeouts')
+const edit = require('../utils/editTimeouts')
 
 module.exports = {
     post: async function (req, res) {
         try {
-            const data = await save.save(req, 'DiscordCommands');
+            await edit.edit(req, 'timeouts');
             res.send("Data Added")
         }
         catch (err) {
@@ -14,7 +14,7 @@ module.exports = {
     
     get: async function (req, res) {
         try {
-            const data = await fetch.fetch(req, 'DiscordCommands', 'CommandName');
+            const data = await fetch.fetch(req, 'timeouts');
             res.send(data)
         }
         catch (err) {
