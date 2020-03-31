@@ -1,11 +1,24 @@
 module.exports = {
     fetch: async function(req, table, order) {
-    
-        let query = req.db._knex(table)
+        let bot = req.query.bot
 
-        query = req.db._knex(table)
-            .orderBy(order, 'desc')
+        switch (bot) {
+            case 'cynet':
+                let query1 = req.dbCyNet._knex(table)
+                .orderBy(order, 'desc')      
+            return query1
+            case 'zemabot':
+                let query2 = req.dbZema._knex(table)
+                .orderBy(order, 'desc')      
+            return query2
+            case 'dash':
+                let query3 = req.dbDash._knex(table)
+                .orderBy(order, 'desc')      
+            return query3
+            default:
+                break;
+        }
         
-    return query
+
    }
 }

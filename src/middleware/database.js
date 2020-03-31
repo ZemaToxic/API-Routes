@@ -1,10 +1,15 @@
 const QueryBuilder = require('simple-knex')
 
 module.exports = {
-    database: function (dbInfo) {
-    const db = new QueryBuilder(dbInfo)
+    database: function (dbDataCyNet, dbDataZema, dbDataDash) {
+    const dbCyNet = new QueryBuilder(dbDataCyNet)
+    const dbZema = new QueryBuilder(dbDataZema)
+    const dbDash = new QueryBuilder(dbDataDash)
+
     return (req, res, next) => {
-      req.db = db
+      req.dbCyNet = dbCyNet
+      req.dbZema = dbZema
+      req.dbDash = dbDash
       next()
     }
   }

@@ -8,6 +8,7 @@ const morgan = require('morgan');
 const bans = require('./routes/bans');
 const timeouts = require('./routes/timeouts');
 const commands = require('./routes/commands');
+const deleted = require('./routes/deleted');
 const databaseMiddle = require('./middleware/database');
 
 if (process.env.NODE_ENV !== 'production') {
@@ -22,18 +23,20 @@ process.title = `API/database/${path.basename(__dirname)}`;
 // defining the Express app
 const app = express();
 
-const { DB_HOST, DB_NAME, DB_USER, DB_CLIENT } = process.env
+const { DB_HOST, DB_NAME_1, DB_NAME_2, DB_NAME_3, DB_USER, DB_CLIENT } = process.env
 
 // MIDDLEWARES
-app
-  .use(databaseMiddle.database({
+app.use(databaseMiddle.database({
     client: DB_CLIENT,
-    connectionInfo: {
-      host: DB_HOST,
-      user: DB_USER,
-      database: DB_NAME
-    }
-  }))
+    connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_1 }
+  },{
+    client: DB_CLIENT,
+    connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_2 }
+  },{
+    client: DB_CLIENT,
+    connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_3 }
+  })
+)
 
 // adding Helmet to enhance your API's security
 app.use(helmet());
@@ -57,6 +60,9 @@ app.post('/bans', bans.post);
 
 app.get('/timeouts', timeouts.get);
 app.post('/timeouts', timeouts.post);
+
+app.get('/deleted', deleted.get);
+app.post('/deleted', deleted.post);
 
 app.get('/commands', commands.get);
 app.post('/commands', commands.post);
