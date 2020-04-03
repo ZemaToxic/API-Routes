@@ -23,7 +23,7 @@ process.title = `API/database/${path.basename(__dirname)}`;
 // defining the Express app
 const app = express();
 
-const { DB_HOST, DB_NAME_1, DB_NAME_2, DB_NAME_3, DB_USER, DB_CLIENT } = process.env
+const { DB_HOST, DB_NAME_1, DB_NAME_2, DB_NAME_3, DB_NAME_4, DB_USER, DB_CLIENT } = process.env
 
 // MIDDLEWARES
 app.use(databaseMiddle.database({
@@ -35,6 +35,9 @@ app.use(databaseMiddle.database({
   },{
     client: DB_CLIENT,
     connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_3 }
+  },{
+    client: DB_CLIENT,
+    connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_4 }
   })
 )
 

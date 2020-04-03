@@ -13,12 +13,15 @@ module.exports = {
     },
     
     get: async function (req, res) {
-        try {
-            const data = await fetch.fetch(req, 'deleted');
-            res.send(data)
-        }
-        catch (err) {
-            res.send(err)
-        }
+
+        res.set({
+            "Content-Type": "text/event-stream",
+            "Cache-Control": "no-cache",
+            Connection: "keep-alive"
+        })
+        setInterval(async () => {
+            let data = await fetch.fetch(req, 'deleted')
+            res.write('data: ' + JSON.stringify(data) + '\n\n')
+        }, 2000)
     }
 }
