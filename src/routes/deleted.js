@@ -6,12 +6,9 @@ module.exports = {
         try {
             await edit.edit(req, 'deleted');
             res.send("Data Added")
-        }
-        catch (err) {
-            res.send(err)
-        }
+        } catch (err) { res.send(err) }
     },
-    
+
     get: async function (req, res) {
 
         res.set({
@@ -19,8 +16,12 @@ module.exports = {
             "Cache-Control": "no-cache",
             Connection: "keep-alive"
         })
+
+        let data = await fetch.fetch(req, 'deleted')
+        res.write('data: ' + JSON.stringify(data) + '\n\n')
+
         setInterval(async () => {
-            let data = await fetch.fetch(req, 'deleted')
+            data = await fetch.fetch(req, 'deleted')
             res.write('data: ' + JSON.stringify(data) + '\n\n')
         }, 2000)
     }

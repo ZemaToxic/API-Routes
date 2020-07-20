@@ -6,10 +6,7 @@ module.exports = {
         try {
             await save.save(req, 'bot_bans');
             res.send("Data Added")
-        }
-        catch (err) {
-            res.send(err)
-        }
+        } catch (err) { res.send(err) }
     },
     
     get: async function (req, res) {
@@ -19,8 +16,12 @@ module.exports = {
             "Cache-Control": "no-cache",
             Connection: "keep-alive"
         })
+
+        let data = await fetch.fetch(req, 'bot_bans', 'ID')
+        res.write('data: ' + JSON.stringify(data) + '\n\n')
+
         setInterval(async () => {
-            let data = await fetch.fetch(req, 'bot_bans', 'ID')
+            data = await fetch.fetch(req, 'bot_bans', 'ID')
             res.write('data: ' + JSON.stringify(data) + '\n\n')
         }, 2000)
     }

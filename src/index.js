@@ -9,6 +9,7 @@ const bans = require('./routes/bans');
 const timeouts = require('./routes/timeouts');
 const commands = require('./routes/commands');
 const deleted = require('./routes/deleted');
+const discord = require('./routes/discord')
 const databaseMiddle = require('./middleware/database');
 
 if (process.env.NODE_ENV !== 'production') {
@@ -23,21 +24,19 @@ process.title = `API/database/${path.basename(__dirname)}`;
 // defining the Express app
 const app = express();
 
-const { DB_HOST, DB_NAME_1, DB_NAME_2, DB_NAME_3, DB_NAME_4, DB_USER, DB_CLIENT } = process.env
+const { DB_HOST, DB_NAME_1, DB_NAME_2, DB_NAME_3, DB_NAME_4, DB_NAME_5, DB_USER, DB_CLIENT } = process.env
 
 // MIDDLEWARES
 app.use(databaseMiddle.database({
-    client: DB_CLIENT,
-    connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_1 }
+    client: DB_CLIENT, connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_1 }
   },{
-    client: DB_CLIENT,
-    connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_2 }
+    client: DB_CLIENT, connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_2 } 
   },{
-    client: DB_CLIENT,
-    connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_3 }
+    client: DB_CLIENT, connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_3 }
   },{
-    client: DB_CLIENT,
-    connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_4 }
+    client: DB_CLIENT, connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_4 }
+  },{
+    client: DB_CLIENT, connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_5 }
   })
 )
 
@@ -58,6 +57,9 @@ app.get('/', (req, res) => {
   res.send('Landing page ~~');
 });
 
+app.get('/discord', discord.get)
+app.post('/discord', discord.post);
+
 app.get('/bans', bans.get);
 app.post('/bans', bans.post);
 
@@ -68,9 +70,10 @@ app.get('/deleted', deleted.get);
 app.post('/deleted', deleted.post);
 
 app.get('/commands', commands.get);
+app.get('/commandStream', commands.stream);
 app.post('/commands', commands.post);
 app.delete('/commands', commands.del);
 app.patch('/commands', commands.patch);
 
 // starting the server
-app.listen(3002, () => { console.log('listening on port 3002'); });
+app.listen(3001, () => { console.log('listening on port 3001'); });
