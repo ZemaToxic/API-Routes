@@ -64,6 +64,7 @@ app.get('/bans', bans.get);
 app.post('/bans', bans.post);
 
 app.get('/timeouts', timeouts.get);
+app.get('/timeouts', timeouts.stream);
 app.post('/timeouts', timeouts.post);
 
 app.get('/deleted', deleted.get);

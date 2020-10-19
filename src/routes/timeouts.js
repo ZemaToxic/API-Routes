@@ -10,6 +10,13 @@ module.exports = {
     },
 
     get: async function (req, res) {
+        try{
+            let data = await fetch.fetch(req, 'timeouts')
+            res.send(data)
+        } catch (err) { res.send(err) }
+    },
+
+    stream: async function (req, res) {
 
         res.set({
             "Content-Type": "text/event-stream",
