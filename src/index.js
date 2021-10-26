@@ -13,7 +13,7 @@ const discord = require('./routes/discord')
 const databaseMiddle = require('./middleware/database');
 
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
+    require('dotenv').config()
 }
 
 const path = require('path');
@@ -28,17 +28,21 @@ const { DB_HOST, DB_NAME_1, DB_NAME_2, DB_NAME_3, DB_NAME_4, DB_NAME_5, DB_USER,
 
 // MIDDLEWARES
 app.use(databaseMiddle.database({
-    client: DB_CLIENT, connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_1 }
-  },{
-    client: DB_CLIENT, connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_2 } 
-  },{
-    client: DB_CLIENT, connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_3 }
-  },{
-    client: DB_CLIENT, connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_4 }
-  },{
-    client: DB_CLIENT, connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_5 }
-  })
-)
+    client: DB_CLIENT,
+    connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_1 }
+}, {
+    client: DB_CLIENT,
+    connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_2 }
+}, {
+    client: DB_CLIENT,
+    connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_3 }
+}, {
+    client: DB_CLIENT,
+    connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_4 }
+}, {
+    client: DB_CLIENT,
+    connectionInfo: { host: DB_HOST, user: DB_USER, database: DB_NAME_5 }
+}))
 
 // adding Helmet to enhance your API's security
 app.use(helmet());
@@ -54,7 +58,7 @@ app.use(morgan('combined'));
 
 // Default Endpoint, i.e no route specified 
 app.get('/', (req, res) => {
-  res.send('Landing page ~~');
+    res.send('This is a API backend, Please use an appropriate endpoint to send or recieve Data');
 });
 
 app.get('/discord', discord.get)
